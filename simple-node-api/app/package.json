@@ -1,0 +1,11 @@
+{
+  "name": "simple-node-api",
+  "version": "1.0.0",
+  "description": "Uma simples api node",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Paulo Neto",
+  "license": "ISC"
+}
