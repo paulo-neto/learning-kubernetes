@@ -1,5 +1,7 @@
-# learning-kubernetes
+## learning-kubernetes
 Configurações e exemplos de POD's, Deployments, Services  com Kubernetes
+
+# Comandos
 
 Iniciar cluster, usando o minikube: 
 ```bash 
@@ -60,6 +62,14 @@ Obtermos informações de um pod com label especifica
 ```bash
 kubectl get pod -l chave=valor
 ```
+Instalar nginx-ingress-controller no cluster
+```bash
+minikube addons enable ingress
+```
+Obter IP externo do cluster
+```bash
+minikube ip
+```
 
 ## Ciclo de vida de um POD
 - Unknown: este é o estado em que todos os pods se iniciam,
@@ -103,3 +113,53 @@ exit(0) , logo, com finalização perfeita sem nenhum erro.
 os contêineres tiverem sido terminados e pelo menos um
 deles não tiver uma saída perfeita (sem nenhum tipo de
 erro).
+
+## Services
+Os services possuem quatro tipos, e podemos escolher setando a chave type , dentro de spec
+
+- ClusterIP: é o modelo padrão, faz com que o serviço
+exponha um IP fixo interno para todo o cluster e qualquer
+serviço que acessar este IP na porta selecionada pela chave
+port do nosso arquivo declarativo.
+
+- NodePort: habilitará uma porta externa que estará descrita
+na chave nodePort dentro de spec.ports (ou então
+será uma porta aleatória entre 30000-32767) que será
+aberta em todos os nós do seu cluster e enviadas para
+dentro da porta selecionada pelo serviço. Ou seja, vamos
+expor o serviço pela internet para todos que acessarem o
+ip-do-cluster:porta .
+
+- oadBalancer: este tipo fará com que seja criado um
+balanceador de carga para seus serviços. No geral, é um
+tipo bem pouco utilizado, porque geralmente estas
+configurações se localizam fora do Kubernetes, em seu
+provedor cloud. Por isso, às vezes se torna necessária uma
+configuração externa (disponível na documentação do
+Kubernetes, na seção de referências).
+
+- ExternalName: este tipo é utilizado somente em casos
+extremamente raros, pois mapeiam para um DNS externo
+em vez de um seletor, como os demais. Neste caso, quando
+estivermos fazendo a resolução do DNS do nosso serviço,
+seremos redirecionados para um DNS externo. A maior
+diferença aqui é que o redirecionamento acontece em nível
+de DNS e não através de um proxy.
+
+Para fixar uma porta especifica, entre 30000 - 32767
+```json
+"spec": {
+  "type": "NodePort",
+  "selector": {
+  "app": "simple-api"
+  },
+  "ports": [{
+  "protocol": "TCP",
+  "port": 8085,
+  "nodePort": 30526,
+  "targetPort": "porta-api"
+  }]
+}
+```
+## Ingress
+
