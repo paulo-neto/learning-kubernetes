@@ -70,6 +70,10 @@ Obter IP externo do cluster
 ```bash
 minikube ip
 ```
+Rodar um comando no mododry-run(teste)
+```bash
+kubectl create -f <arquivo> --dry-run
+```
 
 ## Ciclo de vida de um POD
 - Unknown: este é o estado em que todos os pods se iniciam,
@@ -162,4 +166,8 @@ Para fixar uma porta especifica, entre 30000 - 32767
 }
 ```
 ## Ingress
+
+## Volumes
+
+
 

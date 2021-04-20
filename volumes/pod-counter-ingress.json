@@ -1,0 +1,28 @@
+{
+    "apiVersion": "extensions/v1beta1",
+    "kind": "Ingress",
+    "metadata": {
+        "name": "counter-ing"
+    },
+    "spec": {
+        "backend": {
+            "serviceName": "default-http-backend",
+            "servicePort": 80
+        },
+        "rules": [
+            {
+                "host": "meuclusterlocal.com",
+                "http": {
+                    "paths": [
+                        {
+                            "backend": {
+                                "serviceName": "counter-svc",
+                                "servicePort": 8085
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
