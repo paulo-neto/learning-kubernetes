@@ -70,7 +70,7 @@ Obter IP externo do cluster
 ```bash
 minikube ip
 ```
-Rodar um comando no mododry-run(teste)
+Rodar um comando no modo dry-run(teste)
 ```bash
 kubectl create -f <arquivo> --dry-run
 ```
