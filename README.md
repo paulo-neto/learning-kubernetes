@@ -74,7 +74,10 @@ Rodar um comando no modo dry-run(teste)
 ```bash
 kubectl create -f <arquivo> --dry-run
 ```
-
+Export um IP interno de um POD do cluster
+```bash
+kubectl expose pod <pod-file> --type NodePort
+```
 ## Ciclo de vida de um POD
 - Unknown: este é o estado em que todos os pods se iniciam,
 ele deve durar apenas alguns breves momentos até que o

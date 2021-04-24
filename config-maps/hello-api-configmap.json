@@ -2,28 +2,29 @@
     "apiVersion": "v1",
     "kind": "Pod",
     "metadata": {
-        "name": "crypto-file-api",
+        "name": "hello-pod",
         "labels": {
-            "app": "crypto-file-api"
+            "app": "hello-api"
         }
     },
     "spec": {
         "containers": [
             {
-                "name": "crypto-file",
-                "image": "khaosdoctor/node-crypto-api-file",
+                "name": "hello-api",
+                "image": "khaosdoctor/configmap-node-api",
                 "env": [
                     {
                         "name": "PORT",
                         "value": "8080"
                     },
                     {
-                        "name": "SECRET_VOLUME_DIR",
-                        "value": "/crypto"
-                    },
-                    {
-                        "name": "SECRET_VOLUME_FILENAME",
-                        "value": "aes_secret"
+                        "name": "HELLO_PERSON",
+                        "valueFrom": {
+                            "configMapKeyRef": {
+                                "name": "hello-config",
+                                "key": "person.name"
+                            }
+                        }
                     }
                 ],
                 "ports": [
