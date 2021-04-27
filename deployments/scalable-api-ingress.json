@@ -1,0 +1,27 @@
+{
+    "apiVersion": "extensions/v1beta1",
+    "kind": "Ingress",
+    "metadata": {
+        "name": "scalable-api",
+        "annotations": {
+            "kubernetes.io/ingress.class": "addon-http-application-routing"
+        }
+    },
+    "spec": {
+        "rules": [
+            {
+                "host": "meuclusterlocal.com",
+                "http": {
+                    "paths": [
+                        {
+                            "backend": {
+                                "serviceName": "scalable-api",
+                                "servicePort": "svc-port"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}
